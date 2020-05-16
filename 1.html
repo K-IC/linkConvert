@@ -7,14 +7,22 @@
 </html>
 
 <body>
-  <h1>움짤/영상/음성 쉽게 삽입하기</h1>
-  <p>※구글 링크만 사용가능함 주의</p>
-  <p>※링크 공유 허용해야됨 주의</p>
+<link rel="stylesheet" href="style.css">
+  <h1><font size="100px">움짤/영상/음성 쉽게 삽입하기</font></h1>
+  <p><font size="80px">※구글 링크만 사용가능함 주의</font></p>
+  <p><font size="80px">※링크 공유 허용해야됨 주의</font></p>
 
+  <div id="placeholder">
   <p><input type="text" id="input" placeholder=" https://drive.google.com/..." size="100%"></p>
+  </div>
+
+  <div id="buttons">
   <input type="button" id="process" value="사진/움짤 링크 바꿔줘" onclick="processImage()" style="height:40px">
   <input type="button" id="forVideo" value="영상/음성 링크 바꿔줘" onclick="processVideo()" style="height:40px">
   <input type="button" value="링크 복사할래" onclick="copyToClipboard()" style="height:40px">
+  </div>
+
+
   <div id="result"></div>
 
 
