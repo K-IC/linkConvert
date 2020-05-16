@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>link converter for IC</title>
+<meta charset="utf-8">
+</head>
+</html>
+
+<body>
+  <h1>움짤/영상/음성 쉽게 삽입하기</h1>
+  <p>※구글 링크만 사용가능함 주의</p>
+  <p>※링크 공유 허용해야됨 주의</p>
+
+  <p><input type="text" id="input" placeholder=" https://drive.google.com/..." style="height:40px" size="100%"></p>
+  <input type="button" id="process" value="사진/움짤 링크 바꿔줘" onclick="processImage()">
+  <input type="button" id="forVideo" value="영상/음성 링크 바꿔줘" onclick="processVideo()">
+
+  <div id="result"></div>
+  <p><input type="button" value="링크 복사할래" onclick="copyToClipboard()">
+  </p>
+
+
+
+
+  <script type="text/javascript">
+
+    var temp;
+    var substring;
+    var wrong = 0;
+
+    var pc = "https://drive.google.com/open?id";
+    var mobile = "https://drive.google.com/file/d/";
+
+    function processImage() {
+      temp = document.getElementById("input").value;
+
+      frontPart = temp.substring(0,32);
+
+      if(frontPart == pc) {
+        substring = temp.substring(33,66);
+      } else if (frontPart == mobile) {
+        substring = temp.substring(32,65);
+      } else {
+        wrong = 1;
+        substring = "WRONG LINK"
+        alert("잘못된 링크야ㅠㅠ");
+      }
+
+      if(wrong == 0) {
+        linkForCopy = "img src=\"http://drive.google.com/uc?export=view&id=" + substring + "\"/>";
+        result = "<p>&lt" + linkForCopy + "</p>";
+      } else {
+        linkForCopy = "WRONG LINK"
+        result = "<b style=\"color:red\">WRONG LINK</b>"
+      }
+
+      var blk = document.getElementById("result");
+      blk.innerHTML = result;
+    }
+
+
+    function processVideo() {
+      temp = document.getElementById("input").value;
+
+      frontPart = temp.substring(0,32);
+
+      if(frontPart == pc) {
+        substring = temp.substring(33,66);
+      } else if (frontPart == mobile) {
+        substring = temp.substring(32,65);
+      } else {
+        wrong = 1;
+        substring = "WRONG LINK"
+        alert("잘못된 링크야ㅠㅠ");
+      }
+
+      if(wrong == 0) {
+        linkForCopy = "iframe src=\"https://drive.google.com/file/d/" + substring + "/preview\" width=\"640\" height=\"480\"></iframe>";
+        result = "<p>&lt" + linkForCopy + "</p>";
+      } else {
+        linkForCopy = "WRONG LINK"
+        result = "<b style=\"color:red\">WRONG LINK</b>"
+      }
+
+      var blk = document.getElementById("result");
+      blk.innerHTML = result;
+    }
+
+
+    function copyToClipboard(){
+      var t = document.createElement("textarea");
+      document.body.appendChild(t);
+      t.value = "<" + linkForCopy;
+      t.select();
+      document.execCommand('copy');
+      document.body.removeChild(t);
+    }
+
+  </script>
+</body>
